@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>ÖMER AI</title></head>
+<body style="background:#111;color:white;text-align:center;font-family:Arial">
+
+<h1>🤖 ÖMER AI</h1>
+<p>Hoş geldin {{user}}</p>
+
+<input id="msg" style="padding:10px;width:60%">
+<button onclick="send()">Gönder</button>
+
+<div id="chat"></div>
+
+<script>
+async function send(){
+let msg=document.getElementById("msg").value;
+
+let res=await fetch("/chat",{method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({message:msg})
+});
+
+let data=await res.json();
+document.getElementById("chat").innerHTML+="<p>"+data.reply+"</p>";
+}
+</script>
+
+</body>
+</html>
